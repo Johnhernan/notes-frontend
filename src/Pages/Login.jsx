@@ -12,20 +12,25 @@ const Home = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [emailEmpty, setEmailEmpty] = useState(null);
-
+  const [loginError, setLoginError] = useState(false);
   //JSX Functions
   const handleFormData = (e) => {
     const { name, value } = e.target;
     setFormData((prevValues) => ({ ...prevValues, [name]: value }));
   };
   const submitButton = async () => {
+    setLoginError(false);
     setEmailEmpty(false);
     if (!formData.email) {
       setEmailEmpty(true);
       return;
     }
     const userData = await authUser(formData.email, formData.password);
-    if (!userData) return;
+    console.log(userData)
+    if (userData.data.error) {
+      setLoginError(true);
+      return;
+    }
     dispatch(login(userData.data));
     navigate("/u/dashboard");
   };
@@ -54,8 +59,9 @@ const Home = () => {
           InputLabelProps={{
             style: { color: "grey" },
           }}
+          required
           value={FormData.email}
-          error={emailEmpty}
+          error={loginError}
           margin="dense"
         />
         <TextField
@@ -64,8 +70,10 @@ const Home = () => {
           InputLabelProps={{
             style: { color: "grey" },
           }}
+          required
           type="password"
           value={FormData.password}
+          error={loginError}
           margin="dense"
         />
 
@@ -83,6 +91,9 @@ const Home = () => {
           <Link to="/" rel="noopener">
             Sign up.
           </Link>
+        </Typography>
+        <Typography sx={{color: "red"}}> 
+          {loginError && "Email or password is incorrect."}
         </Typography>
       </form>
     </Container>

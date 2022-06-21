@@ -9,7 +9,7 @@ import {
 
 const Notebook = (props) => {
   return (
-    <Card className="" sx={{ maxWidth: 345, background: props.color }}>
+    <Card className="" sx={{ maxWidth: 345 }}>
       <CardActionArea onClick={() => props.handleClick(props.id)}>
         <CardContent>
           <Typography variant="h6" color="black">
