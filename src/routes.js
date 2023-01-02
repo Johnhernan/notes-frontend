@@ -1,23 +1,25 @@
 import { Routes, Route } from 'react-router-dom';
 
-import Details from './Pages/Details';
-import Dashboard from './Pages/Dashboard';
-import NotFound from './Pages/NotFound';
-import ProtectedRoutes from './components/ProtectedRoutes';
-import Home from './Pages/Home';
-import Login from './Pages/Login';
+import Details from './pages/NotebookDetails';
+import Dashboard from './pages/Dashboard';
+import NotFound from './pages/NotFound';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+
+import ProtectedRoutes from './features/hooks/ProtectedRoutes';
+// import NotebookDetails from "./pages/NotebookDetails";
 
 const MainRoutes = () => {
   return (
     <Routes>
     <Route path="/*" element={<NotFound/>}/>
-    <Route path="/" element={<Home/>}/>
+    <Route path="/" element={<Signup/>}/>
     <Route path="/login" element={<Login/>}/>
-    <Route path="/u" element={<ProtectedRoutes/>}>
+    {/*<Route path="/u" element={<ProtectedRoutes/>}>*/}
       <Route path="/u/dashboard" element={<Dashboard/>}/>
-      <Route path="/u/:id" element={<Details/>}/>
-    </Route>
+      {/*<Route path="/u/:id" element={<NotebookDetails/>}/>*/}
+    {/*</Route>*/}
   </Routes>
-  )
+  );
 }
 export default MainRoutes;

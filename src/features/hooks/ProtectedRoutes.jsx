@@ -8,7 +8,7 @@ const auth = (loggedIn) => {
 
 const ProtectedRoutes = () => {
   const user = useSelector((state) => state.user);
-  const isLogged = auth(user.values.isLoggedIn);
+  const isLogged = true; // auth(user.values.isLoggedIn);
   return isLogged ? <Outlet /> : <Navigate to="/login" />;
 };
 

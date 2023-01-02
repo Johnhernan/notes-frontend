@@ -3,16 +3,17 @@ import { useNavigate, Link } from "react-router-dom";
 import { Typography, TextField, Button, Container } from "@mui/material";
 
 import { useDispatch } from "react-redux";
-import { login } from "../reducers/userSlice";
-import { authUser } from "../api/api";
+import { login } from "../../reducers/userSlice";
+import { authUser } from "../../features/services/api";
 
-const Home = () => {
+const Login = () => {
   //Hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [emailEmpty, setEmailEmpty] = useState(null);
   const [loginError, setLoginError] = useState(false);
+
   //JSX Functions
   const handleFormData = (e) => {
     const { name, value } = e.target;
@@ -25,15 +26,19 @@ const Home = () => {
       setEmailEmpty(true);
       return;
     }
-    const userData = await authUser(formData.email, formData.password);
-    console.log(userData)
-    if (userData.data.error) {
-      setLoginError(true);
-      return;
+    // const userData = await authUser(formData.email, formData.password);
+    // if (userData.data.error) {
+    //   setLoginError(true);
+    //   return;
+    // }
+    const userData = {
+
     }
     dispatch(login(userData.data));
     navigate("/u/dashboard");
   };
+
+  
 
   //Template
   return (
@@ -101,4 +106,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Login;

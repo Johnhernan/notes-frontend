@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Container, FormGroup, TextField, Button } from "@mui/material";
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
-const NotebookForm = (props) => {
-  const [formData, setFormData] = useState({ title: "", description: "" });
+const NoteForm = ({addButton}) => {
+  const [formData, setFormData] = useState({ title: "", content: "" });
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const toggleIsFormOpen = () => {
@@ -25,9 +25,9 @@ const NotebookForm = (props) => {
               margin="dense"
             />
             <TextField
-              name="description"
-              value={formData.description}
-              label="Description"
+              name="content"
+              value={formData.content}
+              label="content"
               color="primary"
               margin="dense"
             />
@@ -35,7 +35,7 @@ const NotebookForm = (props) => {
               variant="contained"
               type="button"
               onClick={() =>
-                props.handleAddButton(formData).then(toggleIsFormOpen())
+                addButton(formData).then(toggleIsFormOpen())
               }
             >
               Add
@@ -45,10 +45,10 @@ const NotebookForm = (props) => {
       )}
 
       <Button variant="outlined" onClick={toggleIsFormOpen}>
-        {props.isFormOpen ? <ArrowDropUp /> : <ArrowDropDown />}
+        {isFormOpen ? <ArrowDropUp /> : <ArrowDropDown />}
       </Button>
     </Container>
   );
 };
 
-export default NotebookForm;
+export default NoteForm;

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Typography, TextField, Button, Container } from "@mui/material";
-import { createUser, authUser } from "../api/api";
-import { login } from "../reducers/userSlice";
+import { createUser, authUser } from "../../features/services/api";
+import { login } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
 
-const Home = () => {
+const Signup = () => {
   //Hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,42 +27,39 @@ const Home = () => {
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevValues) => ({ ...prevValues, [name]: value }));
+    if(value === "") {
+      setFormEmpty(prevValues => ( {...prevValues, [name]: false}));
+    }
+    else {
+      setFormEmpty(prevValues => ( {...prevValues, [name]: true}));
+    }
   };
 
-  const isFormValid = () => {
-    if (!formData.email || !formData.password || !formData.passwordConfirm) {
-      !formData.email && setFormEmpty(prevValues => ({...prevValues, email: true}))
-      !formData.password && setFormEmpty(prevValues => ({...prevValues, password: true}))
-      !formData.passwordConfirm && setFormEmpty(prevValues => ({...prevValues, passwordConfirm: true}))
-      return false;
-    }
-    const { password, passwordConfirm } = formData;
-
-    if (password !== passwordConfirm) {
-      setPassMatchError(true);
-      return false;
-    }
+  const isFormEmpty = () => {
+    if (!formData.email || !formData.password || !formData.passwordConfirm) return false;
     return true;
   };
 
+  const passwordsMatch = () => {
+    formData.password !== formData.passwordConfirm &&
+    setPassMatchError(true);
+    return formData.password !== formData.passwordConfirm;
+  }
+
   const submitForm = async () => {
-    setFormEmpty({
-      email: false,
-      password: false,
-      passwordConfirm: false,
-    })
-    if (!isFormValid()) return;
+    if (!isFormEmpty()) return;
 
     const res = await createUser(formData.email, formData.password);
-    console.log(res)
+
     if (res.data.error) {
       setDoesAccountExist(true);
       return;
     }
+    navigate("/u/dashboard");
     const userData = await authUser(formData.email, formData.password);
     if (!userData) return;
     dispatch(login(userData.data));
-    navigate("/u/dashboard");
+
   };
 
   //Template
@@ -148,4 +145,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Signup;

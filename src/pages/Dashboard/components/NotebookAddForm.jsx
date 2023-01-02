@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { Container, FormGroup, TextField, Button } from "@mui/material";
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
-const NoteForm = (props) => {
-  const [formData, setFormData] = useState({ title: "", content: "" });
+const NotebookAddForm = ({AddButton}) => {
+  const [formData, setFormData] = useState({ title: "", description: "" });
   const [isFormOpen, setIsFormOpen] = useState(false);
-
   const toggleIsFormOpen = () => {
     setIsFormOpen(!isFormOpen);
   };
   const handleFormChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e;
     setFormData((prevValues) => ({ ...prevValues, [name]: value }));
   };
   return (
     <Container>
-      {isFormOpen && (
-        <form noValidate autoComplete="off" onChange={handleFormChange}>
+      {isFormOpen &&
+        <form noValidate autoComplete="off" onChange={(e) => handleFormChange(e.target)}>
           <FormGroup>
             <TextField
               name="title"
@@ -25,30 +24,28 @@ const NoteForm = (props) => {
               margin="dense"
             />
             <TextField
-              name="content"
-              value={formData.content}
-              label="content"
+              name="description"
+              value={formData.description}
+              label="Description"
               color="primary"
               margin="dense"
             />
             <Button
               variant="contained"
               type="button"
-              onClick={() =>
-                props.handleAddButton(formData).then(toggleIsFormOpen())
-              }
+              onClick={() => AddButton(formData).then(toggleIsFormOpen())}
             >
               Add
             </Button>
           </FormGroup>
         </form>
-      )}
+      }
 
       <Button variant="outlined" onClick={toggleIsFormOpen}>
-        {props.isFormOpen ? <ArrowDropUp /> : <ArrowDropDown />}
+        {isFormOpen ? <ArrowDropUp /> : <ArrowDropDown />}
       </Button>
     </Container>
   );
 };
 
-export default NoteForm;
+export default NotebookAddForm;
