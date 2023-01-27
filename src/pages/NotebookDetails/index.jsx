@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 //------------ API & Actions ------------
 import { refreshNotes } from "../../reducers/userSlice";
-import { postNote, getNotes, deleteNote } from "../../features/services/api";
+import { postNote, getNotes, deleteNote } from "../../features/services/NoteService";
 
 //------------ Components/Styles ------------
 import Navbar from "../../features/components/Navbar";

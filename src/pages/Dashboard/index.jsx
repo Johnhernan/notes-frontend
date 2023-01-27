@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 //------------ API & Actions ------------
 import { refreshNotebooks } from "../../reducers/userSlice";
-import { deleteNotebook, getNotebooks, postNotebook } from "../../features/services/api";
+import { deleteNotebook, getNotebooks, postNotebook } from "../../features/services/NotebookService";
+
 //------------ Components/Styles ------------
 import Navbar from "../../features/components/Navbar";
 import Footer from "../../features/components/Footer";

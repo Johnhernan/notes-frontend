@@ -1,9 +1,13 @@
+// Lib Imports 
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Typography, TextField, Button, Container } from "@mui/material";
-import { createUser, authUser } from "../../features/services/api";
-import { login } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
+
+// Custom Imports 
+import { createUser, authUser } from "../../features/services/UserService";
+import { login } from "../../reducers/userSlice";
+
 
 const Signup = () => {
   //Hooks
@@ -36,8 +40,10 @@ const Signup = () => {
   };
 
   const isFormEmpty = () => {
-    if (!formData.email || !formData.password || !formData.passwordConfirm) return false;
-    return true;
+    if ( !formData.email ) return true;
+    if ( !formData.password ) return true;
+    if ( !formData.passwordConfirm ) return true;
+    return false;
   };
 
   const passwordsMatch = () => {
@@ -47,19 +53,18 @@ const Signup = () => {
   }
 
   const submitForm = async () => {
-    if (!isFormEmpty()) return;
-
+    if (isFormEmpty()) return;
     const res = await createUser(formData.email, formData.password);
 
     if (res.data.error) {
       setDoesAccountExist(true);
       return;
     }
-    navigate("/u/dashboard");
+    
     const userData = await authUser(formData.email, formData.password);
     if (!userData) return;
     dispatch(login(userData.data));
-
+    navigate("/u/dashboard");
   };
 
   //Template

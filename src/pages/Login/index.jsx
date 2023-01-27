@@ -4,7 +4,7 @@ import { Typography, TextField, Button, Container } from "@mui/material";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../reducers/userSlice";
-import { authUser } from "../../features/services/api";
+import { authUser } from "../../features/services/UserService";
 
 const Login = () => {
   //Hooks
@@ -26,14 +26,12 @@ const Login = () => {
       setEmailEmpty(true);
       return;
     }
-    // const userData = await authUser(formData.email, formData.password);
-    // if (userData.data.error) {
-    //   setLoginError(true);
-    //   return;
-    // }
-    const userData = {
-
+    const userData = await authUser(formData.email, formData.password);
+    if (userData.data.error) {
+      setLoginError(true);
+      return;
     }
+
     dispatch(login(userData.data));
     navigate("/u/dashboard");
   };
