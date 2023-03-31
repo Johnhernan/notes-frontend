@@ -1,18 +1,19 @@
 import axios from "axios";
 
-export const get = async (request) =>{ 
-    request.method = 'get';
-    axios.get(request);
+const uri = "http://localhost:8000/api";
+
+const call = async (method, request) => { 
+    const headers = {
+        'Connection': 'close',
+        'X-Notetaker-UID': request.UID ?? ''
+    };
+
+    request.headers = headers;
+    request.method = method.toUpperCase();
+    request.url = uri + request.url;
+
+    const res = await axios.request(request);
+    return res;
 }
-export const post = async (request) => {
-    request.method = 'post';
-    axios.post(request);
-}
-export const patch = async (request) => {
-    request.method = 'patch';
-    axios.patch(request);
-}
-export const del = async (request) => {
-    request.method = 'delete';
-    axios.delete(request);
-}
+
+export default call;

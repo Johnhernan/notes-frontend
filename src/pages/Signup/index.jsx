@@ -5,7 +5,7 @@ import { Typography, TextField, Button, Container } from "@mui/material";
 import { useDispatch } from "react-redux";
 
 // Custom Imports 
-import { createUser, authUser } from "../../features/services/UserService";
+import { createUser } from "../../features/services/UserService";
 import { login } from "../../reducers/userSlice";
 
 
@@ -54,16 +54,16 @@ const Signup = () => {
 
   const submitForm = async () => {
     if (isFormEmpty()) return;
+
     const res = await createUser(formData.email, formData.password);
 
+    if (!res) return;
     if (res.data.error) {
       setDoesAccountExist(true);
       return;
     }
     
-    const userData = await authUser(formData.email, formData.password);
-    if (!userData) return;
-    dispatch(login(userData.data));
+    dispatch(login(res.data));
     navigate("/u/dashboard");
   };
 

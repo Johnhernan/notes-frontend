@@ -27,6 +27,7 @@ const Login = () => {
       return;
     }
     const userData = await authUser(formData.email, formData.password);
+    console.log(userData)
     if (userData.data.error) {
       setLoginError(true);
       return;
@@ -35,8 +36,6 @@ const Login = () => {
     dispatch(login(userData.data));
     navigate("/u/dashboard");
   };
-
-  
 
   //Template
   return (

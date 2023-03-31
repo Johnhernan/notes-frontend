@@ -1,25 +1,26 @@
-import { post, get } from '../../lib/api';
+import call from '../../lib/api';
 // User
 export const createUser = async (email, password) => {
     const request = {
-        url: "http://localhost:8000/api/users",
+        url: "/users",
         data: {
             email,
             password
         }
     }
-    return await post(request);
+    return await call('post', request);
 }
 
 export const authUser = async (email, password) => {
     const request = {
-        url: "http://localhost:8000/api/users/u",
+        url: "/users/u",
         data: {
             email,
             password
         }
     }
-    return await get(request);
+    const res = call('get', request);
+    return res;
 }
     
 

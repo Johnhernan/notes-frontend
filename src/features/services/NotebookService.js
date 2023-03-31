@@ -1,44 +1,44 @@
-import { post, get, patch, del } from '../../lib/api';
+import request from '../../lib/api';
 
 // Notebooks
 export const postNotebook = async (UID, notebook) => {
     const request = {
-        url: "http://localhost:8000/api/notes",
+        url: "/notes",
         data: {
            UID,
            notebook
         }
     };
-    return await post(request);
+    return await request("post", request);
 }
 
 export const getNotebooks = async (UID) => {
     const request = {
-        url: "http://localhost:8000/api/notebooks",
+        url: "/notebooks",
         data: {
            UID
         }
     };
-    return await get(request);
+    return await request("get", request);
 }
 export const patchNotebook = async (UID, id, data) => {
     const request = {
-        url: "http://localhost:8000/api/notebooks/n",
+        url: "/notebooks/n",
         data: {
            UID,
            id,
            data
         }
     };
-    return await patch(request);
+    return await request("patch", request);
 }
 export const deleteNotebook = async (UID, id) => {
     const request = {
-        url: "http://localhost:8000/api/notebooks/n",
+        url: "/notebooks/n",
         data: {
            UID,
            id
         }
     };
-    return await del(request);
+    return await request("delete", request);
 }
