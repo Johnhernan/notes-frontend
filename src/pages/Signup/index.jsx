@@ -125,7 +125,7 @@ const Signup = () => {
           required
           type="password"
           helperText={
-            formEmpty.passwordConfirm? "Field cannot be empty":
+            formEmpty.passwordConfirm ? "Field cannot be empty":
             passMatchError && "Password do not Match" 
           }
           error={passMatchError}

@@ -8,7 +8,7 @@ export const createUser = async (email, password) => {
             password
         }
     }
-    return await call('post', request);
+    return call('post', request);
 }
 
 export const authUser = async (email, password) => {
@@ -19,8 +19,7 @@ export const authUser = async (email, password) => {
             password
         }
     }
-    const res = call('get', request);
-    return res;
+    return  call('get', request);
 }
     
 

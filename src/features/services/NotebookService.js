@@ -1,4 +1,4 @@
-import request from '../../lib/api';
+import call from '../../lib/api';
 
 // Notebooks
 export const postNotebook = async (UID, notebook) => {
@@ -9,7 +9,7 @@ export const postNotebook = async (UID, notebook) => {
            notebook
         }
     };
-    return await request("post", request);
+    return call("post", request);
 }
 
 export const getNotebooks = async (UID) => {
@@ -19,7 +19,7 @@ export const getNotebooks = async (UID) => {
            UID
         }
     };
-    return await request("get", request);
+    return call("get", request);
 }
 export const patchNotebook = async (UID, id, data) => {
     const request = {
@@ -30,7 +30,7 @@ export const patchNotebook = async (UID, id, data) => {
            data
         }
     };
-    return await request("patch", request);
+    return call("patch", request);
 }
 export const deleteNotebook = async (UID, id) => {
     const request = {
@@ -40,5 +40,5 @@ export const deleteNotebook = async (UID, id) => {
            id
         }
     };
-    return await request("delete", request);
+    return call("delete", request);
 }

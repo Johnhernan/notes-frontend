@@ -27,7 +27,7 @@ const Login = () => {
       return;
     }
     const userData = await authUser(formData.email, formData.password);
-    console.log(userData)
+
     if (userData.data.error) {
       setLoginError(true);
       return;

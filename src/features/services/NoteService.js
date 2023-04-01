@@ -9,7 +9,7 @@ export const postNote = async (UID, note) => {
            note
         }
     };
-    return await call("post", request);
+    return call("post", request);
 }
 
 export const getNotes = async (UID) => {
@@ -19,7 +19,7 @@ export const getNotes = async (UID) => {
             UID
         }
     };
-    return await call("get", request);
+    return call("get", request);
 }
 export const patchNote = async (UID, id, data) => {
     const request = {
@@ -38,6 +38,6 @@ export const deleteNote = async (UID, id) => {
             UID, id
         }
     };
-    return await call("delete", request);
+    return call("delete", request);
 }
 

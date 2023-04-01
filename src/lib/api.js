@@ -12,8 +12,13 @@ const call = async (method, request) => {
     request.method = method.toUpperCase();
     request.url = uri + request.url;
 
-    const res = await axios.request(request);
-    return res;
+    try {
+        const res = await axios.request(request);
+        return res;
+    }
+    catch (err) {
+        return { message: err, error: true};
+    }
 }
 
 export default call;
