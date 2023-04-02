@@ -4,16 +4,16 @@ const uri = "http://localhost:8000/api";
 
 const call = async (method, request) => { 
     const headers = {
-        'Connection': 'close',
-        'X-Notetaker-UID': request.UID ?? ''
+        'X-Notetaker-UID': request.UID ?? '',
+        // x-access-token: [header].[payload].[signature]
     };
 
     request.headers = headers;
     request.method = method.toUpperCase();
-    request.url = uri + request.url;
+    request.baseURL = uri;
 
     try {
-        const res = await axios.request(request);
+        const res = await axios(request);
         return res;
     }
     catch (err) {

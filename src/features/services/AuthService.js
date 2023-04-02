@@ -1,8 +1,8 @@
 import call from '../../lib/api';
-// User
-export const createUser = async (email, password) => {
+
+export const authUser = async (email, password) => {
     const request = {
-        url: "/users",
+        url: "/auth",
         data: {
             email,
             password
@@ -10,3 +10,4 @@ export const createUser = async (email, password) => {
     }
     return call('post', request);
 }
+    

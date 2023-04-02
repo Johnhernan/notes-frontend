@@ -4,7 +4,7 @@ import { Typography, TextField, Button, Container } from "@mui/material";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../reducers/userSlice";
-import { authUser } from "../../features/services/UserService";
+import { authUser } from "../../features/services/AuthService";
 
 const Login = () => {
   //Hooks
